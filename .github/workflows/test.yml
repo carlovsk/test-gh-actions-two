@@ -1,9 +1,8 @@
 name: test
 
 on:
-  push:
-    branches:
-      - main
+  repository_dispatch:
+    types: [trigger-workflow]
 
 jobs:
   unit-test:
@@ -17,4 +16,4 @@ jobs:
         with:
           node-version-file: .nvmrc
       - name: Echo test
-        run: echo "triggered after action on test-gh-actions-one"
+        run: echo "triggered after action on first repo - ${{github.event.client_payload.message}}"
